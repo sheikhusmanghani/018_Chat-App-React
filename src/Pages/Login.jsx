@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import { authContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { isloggedin, setisloggedin } = useContext(authContext);
@@ -26,8 +27,13 @@ const Login = () => {
       console.log("Logged In  :", userCredentials);
       navigate("/chatapp");
       setisloggedin(true);
+      toast.success("User logged in successfully", {
+        position: "top-center",
+      });
     } catch (e) {
-      console.error("creating user==> : ", e);
+      toast.error("Please write again correctly ! ", {
+        position: "top-center",
+      });
     }
   };
 

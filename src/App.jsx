@@ -10,7 +10,8 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import ProtectedRoute from "./Components/protectedRoute";
 import AuthProvider from "./context/AuthContext";
-import { Toast } from "./Components/reactToast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,9 +33,12 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <div className="App">
+      <ToastContainer autoClose={2000} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </div>
   );
 };
 

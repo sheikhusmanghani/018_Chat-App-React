@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
 import { auth } from "../Firebase";
 import { useContext } from "react";
 import { authContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -32,8 +33,14 @@ const Register = () => {
       console.log("Form Submitted :", userCredentials);
       navigate("/chatapp");
       setisloggedin(true);
+      toast.success("User signed in successfully", {
+        position: "top-center",
+      });
     } catch (e) {
       console.error("creating user==> : ", e);
+      toast.error("Please write again correctly ! ", {
+        position: "top-center",
+      });
     }
   };
   return (

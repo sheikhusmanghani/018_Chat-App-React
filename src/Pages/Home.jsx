@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ const Home = () => {
           console.log("User signed out");
           navigate("/login");
           setisloggedin(false);
+          toast.success("User has been signed out", {
+            position: "top-center",
+          });
         }}
       >
         Logout
