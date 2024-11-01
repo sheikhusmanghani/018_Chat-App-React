@@ -8,8 +8,9 @@ import {
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import ProtectedRoute from "./Components/ProtectedRoute";
-import AuthProvider, { authContext } from "./context/AuthContext";
+import ProtectedRoute from "./Components/protectedRoute";
+import AuthProvider from "./context/AuthContext";
+import { Toast } from "./Components/reactToast";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
