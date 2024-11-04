@@ -9,12 +9,12 @@ import ChatappWrapper from "../Chat App/ChatappWrapper";
 
 const Home = () => {
   return (
-    <>
+    <div className="mmm">
       <Navbar />
       <div className="chatapp-wrapper">
         <ChatappWrapper />
       </div>
-    </>
+    </div>
   );
 };
 

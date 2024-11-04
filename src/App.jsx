@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import ProtectedRoute from "./Components/protectedRoute";
 import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"; 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,10 +34,12 @@ const router = createBrowserRouter(
 const App = () => {
   return (
     <div className="App">
-      <ToastContainer autoClose={2000} />
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
+      <ToastContainer autoClose={2000} pauseOnHover={false} />
+ 
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+    
     </div>
   );
 };
