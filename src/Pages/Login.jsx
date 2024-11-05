@@ -1,12 +1,9 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useContext } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth"; 
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../Firebase";
-import { authContext } from "../context/AuthContext";
+import { auth } from "../Firebase"; 
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { isloggedin, setisloggedin } = useContext(authContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -26,7 +23,6 @@ const Login = () => {
       );
       console.log("Logged In  :", userCredentials);
       navigate("/chatapp");
-      setisloggedin(true);
       toast.success("User logged in successfully", {
         position: "top-center",
       });

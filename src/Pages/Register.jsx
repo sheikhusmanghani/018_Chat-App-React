@@ -2,13 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "../style.css";
 import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
 import { auth } from "../Firebase";
-import { useContext } from "react";
-import { authContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { isloggedin, setisloggedin } = useContext(authContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +29,6 @@ const Register = () => {
       );
       console.log("Form Submitted :", userCredentials);
       navigate("/chatapp");
-      setisloggedin(true);
       toast.success("User signed in successfully", {
         position: "top-center",
       });

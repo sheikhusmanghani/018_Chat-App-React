@@ -1,24 +1,32 @@
+// src/context/AuthProvider.js
+import React, { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import React, { createContext, useState } from "react";
 import { auth } from "../Firebase";
 
-export const authContext = createContext();
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isloggedin, setisloggedin] = useState(false);
-  //
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-    } else {
-      // console.log("User is signed out"); // infinite loop
-    }
-  });
+  const [isloggedin, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Firebase listener to monitor authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user); //   true if user is logged in
+      setLoading(false); // Loading complete
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Show loading while checking auth state
+  }
 
   return (
-    <authContext.Provider value={{ isloggedin, setisloggedin }}>
+    <AuthContext.Provider value={{ isloggedin }}>
       {children}
-    </authContext.Provider>
+    </AuthContext.Provider>
   );
 };
 

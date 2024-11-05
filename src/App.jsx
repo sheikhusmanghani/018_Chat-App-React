@@ -11,14 +11,15 @@ import Home from "./pages/Home";
 import ProtectedRoute from "./Components/protectedRoute";
 import AuthProvider from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
-      {/* <Route index element={<Home />} /> */}
+    <>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      {/* Protected route */}
       <Route
         path="/chatapp"
         element={
@@ -27,20 +28,18 @@ const router = createBrowserRouter(
           </ProtectedRoute>
         }
       />
-    </Route>
+    </>
   )
 );
 
 const App = () => {
   return (
-    <div className="App">
+    <>
       <ToastContainer autoClose={2000} pauseOnHover={false} />
- 
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-    
-    </div>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </>
   );
 };
 
