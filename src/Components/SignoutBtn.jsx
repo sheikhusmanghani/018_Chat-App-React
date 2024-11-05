@@ -9,14 +9,12 @@ const SignOut = () => {
   const navigate = useNavigate();
   const { setisloggedin } = useContext(authContext);
 
-  return (
-    <>
+  return ( 
       <button
         className="py-2 px-3 bg-purple-500 border rounded-md "
         onClick={() => {
           signOut(auth);
-          console.log("User signed out");
-          navigate("/login");
+          // navigate("/login");
           setisloggedin(false);
           toast.success("User has been signed out", {
             position: "top-center",
@@ -24,8 +22,7 @@ const SignOut = () => {
         }}
       >
         Logout
-      </button>
-    </>
+      </button> 
   );
 };
 
