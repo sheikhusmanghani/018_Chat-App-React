@@ -1,28 +1,32 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { db } from "../Firebase";
 
-// get messeges
 const MessagesBox = ({ msgText }) => {
+  // get messeges
+  const q = query(collection(db, "messages"), orderBy("createdAt"));
+  // Setting up real-time listener
+  onSnapshot(
+    q,
+    (snapshot) => {
+      const documents = snapshot.docs.map((doc) => ({
+        id: doc.id, // Auto-generated ID
+        ...doc.data(), // Document fields
+      }));
+      console.log("Real-time documents:", documents);
+    },
+    (error) => {
+      console.error("Error in real-time listener:", error);
+    }
+  );
   return (
     <div className="allMessagesBox h-full p-3 flex flex-col gap-2">
-      {/* leftSideMsg */}
-      {/* <div className="leftSideMsg flex ">
-        <p className="bg-purple-800 h-[33px] w-[32px] flex justify-center items-center mr-1 rounded-full uppercase">
-          A
-        </p>
-        <p className="bg-purple-800 h-fit py-1 px-2 rounded-xl rounded-ss-none max-w-[400px] text-justify">
-          Hii Kese ho..?
-        </p>
-      </div> */}
-      {/* rightSideMsg */}
-      <div className="rightSideMsg flex justify-end ">
-        <p className="bg-purple-800 py-1 px-2 h-fit rounded-xl rounded-ee-none max-w-[400px] text-justify ">
-          {msgText}
-        </p>
-        <p className="bg-purple-800 h-[33px] w-[32px]  flex justify-center items-center ml-1 rounded-full uppercase  self-end">
-          B
-        </p>
-      </div>
+      {/*  messeges ko show krna rehta hy  , order by k sath where bhi ...?*/}
     </div>
   );
 };
