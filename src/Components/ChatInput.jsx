@@ -39,7 +39,7 @@ const ChatInput = () => {
       />
       <button
         type="submit"
-        className="rounded-full px-2 ml-2 text-white bg-gradient-to-r from-purple-500  to-purple-700 hover:bg-gradient-to-br "
+        className="rounded-full px-2 ml-2 text-white sendMsgBtn"
       >
         <VscSend />
       </button>

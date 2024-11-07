@@ -8,22 +8,22 @@ const CurrentChat = () => {
   return (
     <div className="flex flex-col justify-between h-full  ">
       {/* 1st child:  navbar of chat  */}
-      <div className="bg-purple-400">
+      <div className="chat-navbar">
         <div className="flex justify-between items-center gap-2">
           <DivForImage />
           <div className="text-center">
             <p className="text-black text-lg">User Name</p>
             <p className="text-gray-700 text-sm">Last active 10:00 pm</p>
           </div>
-          <div className="call-icons pr-3">
-            <span className="hover:text-black  text-[40px]">&#9990;</span>
+          <div className="  pr-3">
+            <span className="text-purple-950  text-[40px]">&#9990;</span>
           </div>
         </div>
       </div>
       {/*  allMessagesBox */}
       <MessagesBox />
       {/* 2nd child : CHAT-INPUT  */}
-    <ChatInput />
+      <ChatInput />
     </div>
   );
 };

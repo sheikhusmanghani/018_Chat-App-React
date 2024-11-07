@@ -8,7 +8,7 @@ const SignOut = () => {
 
   return (
     <button
-      className="py-2 px-3 bg-purple-500 border rounded-md "
+      className="signoutBtn mx-4 py-2 px-3 rounded-md "
       onClick={() => {
         signOut(auth);
         navigate("/login");

@@ -1,10 +1,9 @@
-import React from "react";
 import SignoutBtn from "./SignoutBtn";
 
 const Navbar = () => {
   return (
-    <div className="sticky top-0 w-full p-3 flex justify-center items-center bg-purple-300">
-      <h1>Chat App</h1>
+    <div className="sticky top-0 w-full p-2 flex justify-between items-center navbar">
+      <h1 className="text-3xl font-bold uppercase ml-5">Chat App</h1>
       <SignoutBtn />
       {/* <nav>
         <ul className="flex">

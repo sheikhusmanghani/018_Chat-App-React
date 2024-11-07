@@ -5,7 +5,7 @@ const DivForImage = () => {
     <div className="p-2">
       <img
         src={errIMG}
-        className="object-cover border border-purple-300 chat h-[45px] w-[45px] rounded-full"
+        className="object-cover border-2 border-purple-950 chat h-[45px] w-[45px] rounded-full"
       />
     </div>
   );
