@@ -14,9 +14,9 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user); //   true if user is logged in
       setLoading(false); // Loading complete
-      console.log('Current User ==> ',user);
+      user && console.log("Current User ==> ", user);
     });
-
+    // cleanup function
     return () => unsubscribe();
   }, []);
 

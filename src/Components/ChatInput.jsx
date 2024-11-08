@@ -1,9 +1,6 @@
 import {
   addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
+  collection, 
   serverTimestamp,
 } from "firebase/firestore";
 import { VscSend } from "react-icons/vsc";
@@ -13,6 +10,7 @@ const ChatInput = () => {
   //
   const sendMsg = async (e) => {
     e.preventDefault();
+    console.log(e)
     try {
       const message = e.target.elements.message.value;
       if (!message || message === " ") return; // to ignore on false or empty message

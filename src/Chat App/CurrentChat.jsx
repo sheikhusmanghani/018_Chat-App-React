@@ -1,8 +1,7 @@
-import React from "react";
 import DivForImage from "../Components/DivForImage";
-import { VscSend } from "react-icons/vsc";
 import MessagesBox from "../Components/MessagesBox";
 import ChatInput from "../Components/ChatInput";
+import { auth } from "../Firebase";
 
 const CurrentChat = () => {
   return (
@@ -12,7 +11,7 @@ const CurrentChat = () => {
         <div className="flex justify-between items-center gap-2">
           <DivForImage />
           <div className="text-center">
-            <p className="text-black text-lg">User Name</p>
+            <p className="text-black text-lg">{auth.currentUser.displayName}</p>
             <p className="text-gray-700 text-sm">Last active 10:00 pm</p>
           </div>
           <div className="  pr-3">

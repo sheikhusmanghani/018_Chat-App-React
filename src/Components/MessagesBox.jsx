@@ -16,7 +16,6 @@ const MessagesBox = () => {
           ...doc.data(),
         }));
         setMessages(documents);
-        console.log(documents);
       },
       (error) => {
         console.error("Error in real-time listener:", error);

@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
 import "../style.css";
-import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import { toast } from "react-toastify";
+import { updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,23 +17,29 @@ const Register = () => {
         event.target.elements.lastName.value,
       email: event.target.elements.email.value,
       password: event.target.elements.password.value,
-      number: event.target.elements.phoneNumber.value,
     };
 
     // ------------------ authentication -----------------------
     try {
-      const userCredentials = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      console.log("Form Submitted :", userCredentials);
+
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, {
+          displayName: formData.name,
+        });
+      }
+      //
       navigate("/chatapp");
+      // toast
       toast.success("User signed in successfully", {
         position: "top-center",
       });
     } catch (e) {
-      console.error("creating user==> : ", e);
+      console.error(" user==> : ", e);
       toast.error("Please write again correctly ! ", {
         position: "top-center",
       });
@@ -89,6 +95,7 @@ const Register = () => {
             className="input  my-[2px] mx-4 "
             required
           />
+
           <input type="submit" className="submitBtn" />
           <p>
             Do you have already registerd ?{" "}

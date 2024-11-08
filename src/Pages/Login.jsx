@@ -1,6 +1,6 @@
-import { signInWithEmailAndPassword } from "firebase/auth"; 
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../Firebase"; 
+import { auth } from "../Firebase";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -16,12 +16,7 @@ const Login = () => {
 
     // ------------------ authentication -----------------------
     try {
-      const userCredentials = await signInWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-      console.log("Logged In  :", userCredentials);
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
       navigate("/chatapp");
       toast.success("User logged in successfully", {
         position: "top-center",
