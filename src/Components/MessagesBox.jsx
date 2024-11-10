@@ -7,7 +7,11 @@ const MessagesBox = () => {
   const [messages, setMessages] = useState([]);
   // get messeges
   useEffect(() => {
-    const q = query(collection(db, "messages"), orderBy("createdAt"));
+    const q = query(
+      collection(db, "messages"),
+      orderBy("createdAt", "asc")
+      // where(, "==", )
+    );
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
@@ -16,6 +20,7 @@ const MessagesBox = () => {
           ...doc.data(),
         }));
         setMessages(documents);
+        console.log(documents);
       },
       (error) => {
         console.error("Error in real-time listener:", error);
@@ -31,10 +36,10 @@ const MessagesBox = () => {
       {/*  messeges ko show krna rehta hy  , */}
       {messages.map((msg) =>
         // Check if the message belongs to the current user
-        msg.uid === auth.currentUser.uid ? (
-          <RightMsg key={msg.id} text={msg.text} />
+        msg.senderId === auth.currentUser.uid ? (
+          <RightMsg key={msg.id} text={msg.text} letter={msg.username} />
         ) : (
-          <LeftMsg key={msg.id} text={msg.text} />
+          <LeftMsg key={msg.id} text={msg.text} letter={msg.username} />
         )
       )}
     </div>

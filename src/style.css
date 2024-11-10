@@ -49,17 +49,17 @@
 }
 
 /* ---------------------- Home page k liye --------------------- */
-.navbar{
+.navbar {
   background: var(--lightPurple);
 }
-.signoutBtn{
+.signoutBtn {
   background: var(--darkPurple);
-  color: white; 
-  font-size: larger; 
+  color: white;
+  font-size: larger;
 }
-.chat-navbar{
+.chat-navbar {
   background: var(--whitePurple);
- box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .chatapp-wrapper {
   display: flex;
@@ -72,15 +72,13 @@ body {
   background-color: var(--darkPurple);
 }
 .sendMsgBtn {
-  background: var(--darkPurple)
+  background: var(--darkPurple);
 }
 .currentChat {
   background-color: var(--lightPurple);
 }
 .allChats {
-  background-color: var(--whitePurple);
-  /* padding: 10px;
-  border-radius: 5px; */
+  background-color: var(--lightPurple);
 }
 .rightSideMsg p {
   background: rgb(147, 13, 165);
@@ -90,3 +88,4 @@ body {
   background: var(--whitePurple);
   color: var(--darkPurple);
 }
+/* ------------------------ s s ------------------ */

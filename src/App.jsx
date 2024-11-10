@@ -5,13 +5,14 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Home from "./pages/Home";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Home from "./Pages/Home";
 import ProtectedRoute from "./Components/protectedRoute";
-import AuthProvider from "./context/AuthContext";
+import AuthProvider from "./Context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ChatProvider from "./Context/ChatContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,9 +37,11 @@ const App = () => {
   return (
     <>
       <ToastContainer autoClose={2000} pauseOnHover={false} />
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
+      <ChatProvider>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </ChatProvider>
     </>
   );
 };

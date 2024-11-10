@@ -1,8 +1,9 @@
 import "../style.css";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../Firebase";
+import { auth, db } from "../Firebase";
 import { toast } from "react-toastify";
-import { updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -26,17 +27,16 @@ const Register = () => {
         formData.email,
         formData.password
       );
-
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, {
-          displayName: formData.name,
-        });
-      }
       //
       navigate("/chatapp");
       // toast
       toast.success("User signed in successfully", {
         position: "top-center",
+      });
+      await addDoc(collection(db, "users"), {
+        uid: auth.currentUser.uid,
+        name: formData.name,
+        createdAt: serverTimestamp(),
       });
     } catch (e) {
       console.error(" user==> : ", e);

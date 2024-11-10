@@ -1,8 +1,4 @@
-import {
-  addDoc,
-  collection, 
-  serverTimestamp,
-} from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { VscSend } from "react-icons/vsc";
 import { auth, db } from "../Firebase";
 
@@ -10,7 +6,6 @@ const ChatInput = () => {
   //
   const sendMsg = async (e) => {
     e.preventDefault();
-    console.log(e)
     try {
       const message = e.target.elements.message.value;
       if (!message || message === " ") return; // to ignore on false or empty message
@@ -19,8 +14,10 @@ const ChatInput = () => {
       await addDoc(collection(db, "messages"), {
         text: message,
         createdAt: serverTimestamp(),
-        uid: auth.currentUser.uid,
-      }); 
+        senderId: auth.currentUser.uid,
+        // receiver:  ,
+        username: auth.currentUser.displayName,
+      });
     } catch (e) {
       console.log(e.message);
     }
