@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../Firebase";
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,31 +16,34 @@ const Register = () => {
         event.target.elements.firstName.value +
         " " +
         event.target.elements.lastName.value,
-      email: event.target.elements.email.value,
-      password: event.target.elements.password.value,
+      email: event.target.elements.email.value, 
     };
 
-    // ------------------ authentication -----------------------
+    // ---------------------------------   authentication   ----------------------------
     try {
-      await createUserWithEmailAndPassword(
+      const resp = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      //
-      navigate("/chatapp");
       // toast
       toast.success("User signed in successfully", {
         position: "top-center",
       });
-      await addDoc(collection(db, "users"), {
-        uid: auth.currentUser.uid,
+      //
+      navigate("/chatapp");
+
+      // add data in firestore
+      const docRef = doc(db, "users", resp.user.uid);
+      await setDoc(docRef, {
+        userId: resp.user.uid,
         name: formData.name,
+        email: formData.email,
         createdAt: serverTimestamp(),
       });
+      //
     } catch (e) {
-      console.error(" user==> : ", e);
-      toast.error("Please write again correctly ! ", {
+      toast.error(e.code.split("/")[1].split("-").join(" "), {
         position: "top-center",
       });
     }
