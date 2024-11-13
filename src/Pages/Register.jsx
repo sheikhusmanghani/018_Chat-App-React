@@ -16,7 +16,8 @@ const Register = () => {
         event.target.elements.firstName.value +
         " " +
         event.target.elements.lastName.value,
-      email: event.target.elements.email.value, 
+      email: event.target.elements.email.value,
+      password: event.target.elements.password.value,
     };
 
     // ---------------------------------   authentication   ----------------------------

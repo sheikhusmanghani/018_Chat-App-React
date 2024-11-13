@@ -2,9 +2,7 @@ import { useContext } from "react";
 import { ChatContext } from "../Context/ChatContext";
 
 const AllChats = () => {
-  const { users, setMsgReceiver } = useContext(ChatContext);
-  // console.log("all chats data ==>  ", users);
-
+  
   return (
     <div className="text-black w-full h-full mx-2 md:px-2 md:m-0 flex items-center justify-center md:block">
       <div className="w-full py-3 hidden md:flex md:justify-center">
@@ -15,7 +13,7 @@ const AllChats = () => {
         />
       </div>
       <div className="users flex justify-center w-full md:block md:overflow-y-auto overflow-x-auto ">
-        {users?.map((user) => {
+        {/* {users?.map((user) => {
           return (
             <p
               key={user.uid}
@@ -28,7 +26,7 @@ const AllChats = () => {
               {user.name}
             </p>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

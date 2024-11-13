@@ -8,7 +8,7 @@ import {
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
-import ProtectedRoute from "./Components/protectedRoute";
+// import ProtectedRoute from "./Components/protectedRoute";
 import AuthProvider from "./Context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,16 +19,17 @@ const router = createBrowserRouter(
     <>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/chatapp" element={<Home />} />
 
       {/* Protected route */}
-      <Route
+      {/* <Route
         path="/chatapp"
         element={
           <ProtectedRoute>
             <Home />
           </ProtectedRoute>
         }
-      />
+      /> */}
     </>
   )
 );
@@ -36,7 +37,7 @@ const router = createBrowserRouter(
 const App = () => {
   return (
     <>
-      <ToastContainer autoClose={2000} pauseOnHover={false} />
+      <ToastContainer autoClose={2000} />
       <ChatProvider>
         <AuthProvider>
           <RouterProvider router={router} />
