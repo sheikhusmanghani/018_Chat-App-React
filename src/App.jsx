@@ -1,50 +1,38 @@
+// App.js
 import "./style.css";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
-// import ProtectedRoute from "./Components/protectedRoute";
-import AuthProvider from "./Context/AuthContext";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import { AuthProvider } from "./Context/AuthContext.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ChatProvider from "./Context/ChatContext";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/chatapp" element={<Home />} />
-
-      {/* Protected route */}
-      {/* <Route
-        path="/chatapp"
-        element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        }
-      /> */}
-    </>
-  )
-);
-
-const App = () => {
+function App() {
   return (
     <>
       <ToastContainer autoClose={2000} />
-      <ChatProvider>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </ChatProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/chatapp"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Router>
+      </AuthProvider>
     </>
   );
-};
+}
 
 export default App;
