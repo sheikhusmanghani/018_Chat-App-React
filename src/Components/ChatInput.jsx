@@ -1,8 +1,7 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { VscSend } from "react-icons/vsc";
+import { VscSend } from "react-icons/vsc"; // send icon
 import { auth, db } from "../Firebase";
-import { useContext } from "react";
-import { ChatContext } from "../Context/ChatsData";
+import { useContext } from "react"; 
 
 const ChatInput = () => {
   //

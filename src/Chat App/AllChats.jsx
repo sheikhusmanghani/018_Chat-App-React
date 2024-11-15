@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { ChatContext } from "../Context/ChatsData";
+ 
 
 const AllChats = () => {
+  
   
   return (
     <div className="text-black w-full h-full mx-2 md:px-2 md:m-0 flex items-center justify-center md:block">

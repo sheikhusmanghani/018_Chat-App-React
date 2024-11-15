@@ -1,4 +1,3 @@
-import React from "react";
 import AllChats from "./AllChats";
 import CurrentChat from "./CurrentChat";
 

@@ -20,28 +20,38 @@ const Register = () => {
       password: event.target.elements.password.value,
     };
 
-    // ---------------------------------   authentication   ----------------------------
+    // -----------------------------  authentication  / Firestore  ----------------------------
     try {
       const resp = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+
       // toast
-      toast.success("User signed in successfully", {
+      const id = toast.loading("User Has Been Creating...", {
         position: "top-center",
       });
-      //
-      navigate("/chatapp");
 
       // add data in firestore
-      const docRef = doc(db, "users", resp.user.uid);
-      await setDoc(docRef, {
+      await setDoc(doc(db, "users", resp.user.uid), {
         userId: resp.user.uid,
         name: formData.name,
         email: formData.email,
         createdAt: serverTimestamp(),
       });
+
+      //
+      toast.update(id, {
+        render: "User signed in successfully !",
+        type: "success",
+        isLoading: false,
+        autoClose: 1000, // Closes after 3 seconds
+      });
+
+      //
+      navigate("/chatapp");
+
       //
     } catch (e) {
       toast.error(e.code.split("/")[1].split("-").join(" "), {
