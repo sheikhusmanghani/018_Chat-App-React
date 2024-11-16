@@ -1,32 +1,56 @@
- 
+import { useContext, useEffect, useState } from "react";
+import { context } from "../Context/Context";
+import Loader from "../Components/Loader";
 
 const AllChats = () => {
-  
-  
+  const { users, loading, setMsgReceiver } = useContext(context);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Filter users based on search term
+  const filteredUsers = users?.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!users || users.length === 0) {
+    return (
+      <div className="text-center">
+        <p className="text-red-500">Failed to load users. Please try again.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="text-black w-full h-full mx-2 md:px-2 md:m-0 flex items-center justify-center md:block">
+      {/* Search Box */}
       <div className="w-full py-3 hidden md:flex md:justify-center">
         <input
           type="text"
           placeholder="Search By User Name"
-          className="text-center bg-white p-2 rounded shadow-md "
+          className="text-center bg-white p-2 rounded shadow-md"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="users flex justify-center w-full md:block md:overflow-y-auto overflow-x-auto ">
-        {/* {users?.map((user) => {
-          return (
+
+      {/* User List */}
+      <div className="users flex justify-center w-full md:block md:overflow-y-auto overflow-x-auto">
+        {filteredUsers?.length > 0 ? (
+          filteredUsers.map((user) => (
             <p
-              key={user.uid}
+              key={user.userId}
               className="bg-purple-950 text-white rounded p-2 shadow m-1 hover:opacity-80"
-              onClick={() => {
-                console.log(user);
-                setMsgReceiver(user);
-              }}
+              onClick={() => setMsgReceiver(user)}
             >
               {user.name}
             </p>
-          );
-        })} */}
+          ))
+        ) : (
+          <p className="text-gray-500 text-center">No users found.</p>
+        )}
       </div>
     </div>
   );

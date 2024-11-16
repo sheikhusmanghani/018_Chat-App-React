@@ -28,19 +28,6 @@ const db = getFirestore(app);
   //   }
   // });
   //  ----------------------------- add user in firestore  ------------------------------------
-
-async function addData() {
-  try {
-    const docRef = doc(db, "users", "uniqueUserID"); // "uniqueUserID" ko apni desired ID se replace karo
-    await setDoc(docRef, {
-      name: "Jane Doe",
-      age: 30,
-      email: "janedoe@example.com",
-    });
-    console.log("Document successfully written!");
-  } catch (e) {
-    console.error("Error writing document: ", e);
-  }
-}
+ 
 
 export { auth, db };

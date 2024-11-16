@@ -4,32 +4,36 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./Firebase";
+import { useContext } from "react";
+import { context } from "./Context/Context"; // Make sure this is the correct path
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { currentUser } = useContext(context); // Consuming currentUser from context
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(user, "hyga");
-        setIsLoggedIn(true);
-      } else {
-        console.log("nhi hy");
-        setIsLoggedIn(false);
-      }
-    });
-  }, []);
+  console.log("currentUser:", currentUser); // Add this line to debug the value of currentUser
 
   return (
     <>
       <ToastContainer autoClose={2000} />
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/chatapp" element={isLoggedIn ? <Home /> : <Login />} />
+        {/* Redirect authenticated users away from login/register pages */}
+        <Route
+          path="/register"
+          element={currentUser ? <Navigate to="/chatapp" /> : <Register />}
+        />
+        <Route
+          path="/login"
+          element={currentUser ? <Navigate to="/chatapp" /> : <Login />}
+        />
+
+        {/* Protect /chatapp route */}
+        <Route
+          path="/chatapp"
+          element={currentUser ? <Home /> : <Navigate to="/login" />}
+        />
+
+        {/* Redirect to login if the route doesn't exist */}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </>
   );
