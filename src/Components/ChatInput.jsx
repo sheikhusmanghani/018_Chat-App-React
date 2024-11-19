@@ -7,14 +7,19 @@ import { context } from "../Context/Context";
 const ChatInput = () => {
   const { currentUser, msgReceiver } = useContext(context);
   // console.log(">>>", currentUser.uid, msgReceiver.userId); // ok
-  //
+
   const sendMsg = async (e) => {
     e.preventDefault();
     try {
       const message = e.target.elements.message.value;
       e.target.reset(); // input clean
 
-      // if (!message || message === " ") return; // to ignore on false or empty message
+      if (!message || message === " " || message.trim() == "") return; // to ignore on false or empty message
+
+      const chatId =
+        currentUser.uid < msgReceiver.userId
+          ? `${currentUser.uid}_${msgReceiver.userId}`
+          : `${msgReceiver.userId}_${currentUser.uid}`;
 
       // send message
       const res = await addDoc(collection(db, "messages"), {
@@ -22,8 +27,10 @@ const ChatInput = () => {
         sentAt: serverTimestamp(),
         senderUid: currentUser.uid,
         receiverUid: msgReceiver.userId,
+        chatId,
       });
-      console.log(res);
+
+      // console.log(res);
     } catch (e) {
       console.log(e.message);
     }

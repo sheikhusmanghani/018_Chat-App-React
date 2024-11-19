@@ -5,12 +5,12 @@ import Register from "./Pages/Register";
 import Home from "./Pages/Home";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
-import { context } from "./Context/Context"; // Make sure this is the correct path
+import { context } from "./Context/Context";
 
 function App() {
-  const { currentUser } = useContext(context); // Consuming currentUser from context
+  const { currentUser } = useContext(context); // to get currentUser from context
 
-  console.log("currentUser:", currentUser); // Add this line to debug the value of currentUser
+  // console.log("currentUser:", currentUser);
 
   return (
     <>
@@ -26,13 +26,13 @@ function App() {
           element={currentUser ? <Navigate to="/chatapp" /> : <Login />}
         />
 
-        {/* Protect /chatapp route */}
+        {/* Protect /chatapp page */}
         <Route
           path="/chatapp"
           element={currentUser ? <Home /> : <Navigate to="/login" />}
         />
 
-        {/* Redirect to login if the route doesn't exist */}
+        {/* agr unknown url hua to Redirect kry ga login pr  */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </>

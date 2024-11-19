@@ -3,10 +3,11 @@ import { context } from "../Context/Context";
 import Loader from "../Components/Loader";
 
 const AllChats = () => {
-  const { users, loading, setMsgReceiver } = useContext(context);
+  const { users, loading, setMsgReceiver, msgReceiver, currentUser } =
+    useContext(context);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter users based on search term
+  // Filter users
   const filteredUsers = users?.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -42,14 +43,18 @@ const AllChats = () => {
           filteredUsers.map((user) => (
             <p
               key={user.userId}
-              className="bg-purple-950 text-white rounded p-2 shadow m-1 hover:opacity-80"
+              className={`rounded p-2 shadow m-1 hover:opacity-80 cursor-pointer capitalize text-center ${
+                msgReceiver?.userId === user.userId
+                  ? "bg-[#930DA5] text-white" // Selected user
+                  : "bg-[#EEEEEE] text-black font-bold" // Default user
+              }`}
               onClick={() => setMsgReceiver(user)}
             >
               {user.name}
             </p>
           ))
         ) : (
-          <p className="text-gray-500 text-center">No users found.</p>
+          <p className="text-gray-500 text-center p-3">No users found.</p>
         )}
       </div>
     </div>

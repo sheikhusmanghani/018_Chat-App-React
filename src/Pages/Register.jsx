@@ -29,7 +29,7 @@ const Register = () => {
       );
 
       // toast
-      const id = toast.loading("User Has Been Creating...", {
+      const id = toast.success("User signed in successfully !", {
         position: "top-center",
       });
 
@@ -42,12 +42,12 @@ const Register = () => {
       });
 
       //
-      toast.update(id, {
-        render: "User signed in successfully !",
-        type: "success",
-        isLoading: false,
-        autoClose: 1000, // Closes after 3 seconds
-      });
+      // toast.update(id, {
+      //   render: "User signed in successfully !",
+      //   type: "success",
+      //   isLoading: false,
+      //   autoClose: 1000,
+      // });
 
       //
       navigate("/chatapp");
