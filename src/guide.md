@@ -1,7 +1,5 @@
-username me masla hy.. (chatinput : 23)
-msg krny pe break ho rha hy
-
-loaders nhi hyn abhi ...
+navbar me msg receiver k first alphabets aaygy
+right clcik pr options div
 
 --------------------------------- Add Data -------------------------------
 
@@ -12,7 +10,7 @@ Ye method aik **new document** ko automatically generated ID ke saath kisi colle
 **Example:**
 
 ```javascript
-import { db } from "./firebase"; // Apna initialized Firebase config import karo
+import { db } from "./firebase"; // Apna initialized Firebase config
 import { collection, addDoc } from "firebase/firestore";
 
 async function addData() {
@@ -141,7 +139,7 @@ async function batchWrite() {
 ```
 
 -------------------------- Get Data --------------------------------
- 
+
 ### 1. `getDoc` Method (Single Document)
 
 Agar tum kisi specific document ko **get** karna chahte ho, to `getDoc` method ka use karo. Ye method aik document ko **ID ke zariye retrieve** karta hai.

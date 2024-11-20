@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const LeftMsg = ({ text }) => {
   //   const firstLetter = letter[0];
@@ -40,40 +41,57 @@ export const RightMsg = ({ text }) => {
 
   // Handle right-click
   const onRightClick = (e) => {
-    e.preventDefault(); // Default browser menu ko disable karein
+    e.preventDefault(); // Disable default browser context menu
 
-    // Set menu position and show menu
+    // Set menu position where right-click happened
     setMenuPosition({ x: e.pageX, y: e.pageY });
-    setShowMenu(true);
+    setShowMenu(true); // Show the custom menu
   };
 
   // Handle click on options
   const handleOptionClick = (option) => {
-    setShowMenu(false); // Menu ko hide karna
+    setShowMenu(false); // Hide the menu
     console.log(`${option} clicked`);
-    // Implement your functionality here
+
+    //  custom functionality daal sakty hyn yaha
     if (option === "Edit") {
-      // Edit functionality
       console.log("Edit function triggered");
     } else if (option === "Delete") {
-      // Delete functionality
       console.log("Delete function triggered");
+    } else if (option === "Copy") {
+      console.log("Copy function triggered");
+      navigator.clipboard.writeText(text);
+      toast.success("Text copied to clipboard", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: true,
+      });
     }
   };
 
-  // Hide menu on any click outside
-  const hideMenu = () => {
-    setShowMenu(false);
-  };
+  // Hide menu on any global click outside
+  useEffect(() => {
+    const handleGlobalClick = (e) => {
+      setShowMenu(false);
+    };
+
+    if (showMenu) {
+      document.addEventListener("click", handleGlobalClick);
+    }
+
+    // jab menu closed hoga to...
+    return () => {
+      document.removeEventListener("click", handleGlobalClick);
+    };
+  }, [showMenu]);
 
   return (
     <div
-      className="rightSideMsg flex justify-end relative"
+      className="rightSideMsg flex justify-end "
       onContextMenu={onRightClick}
-      onClick={hideMenu} // Menu ko hide karne ke liye
     >
       {/* Main message bubble */}
-      <p className="py-1 px-2 h-fit rounded-xl rounded-ee-none max-w-[400px] text-justify bg-purple-800 text-white">
+      <p className="relative py-1 px-2 h-fit rounded-xl rounded-ee-none max-w-[400px] text-justify bg-purple-800 text-white">
         {text}
       </p>
       <p className="h-[33px] w-[32px] flex justify-center items-center ml-1 rounded-full uppercase bg-gray-200">
@@ -83,24 +101,34 @@ export const RightMsg = ({ text }) => {
       {/* Custom context menu */}
       {showMenu && (
         <ul
-          className="absolute bg-white border text-black border-gray-300 rounded-md shadow-md"
+          className="absolute text-center text-2xl flex bg-white border text-purple-950  border-gray-300 rounded shadow-lg cursor-pointer "
           style={{
             top: `${menuPosition.y}px`,
             left: `${menuPosition.x}px`,
             zIndex: 1000,
           }}
+          onClick={(e) => e.stopPropagation()} // Prevent menu click from hiding itself
         >
           <li
-            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            title="Edit"
+            className="px-1 py-1 hover:bg-gray-100 "
             onClick={() => handleOptionClick("Edit")}
           >
-            Edit
+            &#128395;
           </li>
           <li
-            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            title="Delete"
+            className="px-1 py-1 hover:bg-gray-100 "
             onClick={() => handleOptionClick("Delete")}
           >
-            Delete
+            &#128465;
+          </li>
+          <li
+            title="Copy"
+            className="px-1 py-1 hover:bg-gray-100 "
+            onClick={() => handleOptionClick("Copy")}
+          >
+            &#128464;
           </li>
         </ul>
       )}
