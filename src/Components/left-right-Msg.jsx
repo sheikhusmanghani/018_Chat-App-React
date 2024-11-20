@@ -5,7 +5,7 @@ export const LeftMsg = ({ text }) => {
       <p className="bg-purple-800 h-[33px] w-[32px] flex justify-center items-center mr-1 rounded-full uppercase">
         {/* {firstLetter} */}B
       </p>
-      <p className="bg-purple-800 h-fit py-1 px-2 rounded-xl rounded-ss-none max-w-[400px] text-justify">
+      <p className="bg-purple-800 h-fit py-1 px-2 rounded-xl rounded-ss-none max-w-[400px] text-justify break-words">
         {text}
       </p>
     </div>

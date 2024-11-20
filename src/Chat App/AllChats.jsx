@@ -43,10 +43,10 @@ const AllChats = () => {
           filteredUsers.map((user) => (
             <p
               key={user.userId}
-              className={`rounded p-2 shadow m-1 hover:opacity-80 cursor-pointer capitalize text-center ${
+              className={`rounded p-2 shadow m-1  cursor-pointer capitalize text-center ${
                 msgReceiver?.userId === user.userId
                   ? "bg-[#930DA5] text-white" // Selected user
-                  : "bg-[#EEEEEE] text-black font-bold" // Default user
+                  : "bg-white text-black font-bold hover:bg-[#EEEEEE]" // Default user
               }`}
               onClick={() => setMsgReceiver(user)}
             >
