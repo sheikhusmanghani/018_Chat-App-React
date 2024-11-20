@@ -46,7 +46,7 @@ const AllChats = () => {
               className={`rounded p-2 shadow m-1  cursor-pointer capitalize text-center ${
                 msgReceiver?.userId === user.userId
                   ? "bg-[#930DA5] text-white" // Selected user
-                  : "bg-white text-black font-bold hover:bg-[#EEEEEE]" // Default user
+                  : "bg-white text-black font-bold hover:bg-[#e2dfdf]" // Default user
               }`}
               onClick={() => setMsgReceiver(user)}
             >

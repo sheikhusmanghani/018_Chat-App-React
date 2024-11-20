@@ -15,7 +15,9 @@ const MessagesBox = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const { currentUser, msgReceiver } = useContext(context);
-  console.log(msgReceiver, currentUser);
+
+  // console.log(msgReceiver, currentUser);
+
   useEffect(() => {
     if (!currentUser || !msgReceiver) return;
 
