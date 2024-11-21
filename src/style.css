@@ -88,6 +88,9 @@ body {
   background: var(--whitePurple);
   color: var(--darkPurple);
 }
+.logged-in-user-navbar{
+  background: var(--whitePurple); 
+}
 /* ------------------------ Loader ------------------ */
 /* Loader.css */
 .loader {
@@ -118,7 +121,14 @@ body {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  @media screen and (max-width: 765px) {
+    height: 6px;
+    width: 100%;
+  }
+  @media screen and (min-width: 765px) {
+    width: 4px;
+    height: 100%;
+  }
 }
 
 /* Track */
