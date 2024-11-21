@@ -18,7 +18,7 @@ const AllChats = () => {
 
   if (!users || users.length === 0) {
     return (
-      <div className="text-center">
+      <div className="text-center pt-[100px]">
         <p className="text-red-500">Failed to load users. Please try again.</p>
       </div>
     );

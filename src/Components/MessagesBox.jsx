@@ -63,7 +63,7 @@ const MessagesBox = () => {
 
       {messages?.map((msg) =>
         msg.senderUid === currentUser.uid ? (
-          <RightMsg text={msg.text} key={msg.id} />
+          <RightMsg text={msg.text} key={msg.id} msgId={msg.id}/>
         ) : (
           <LeftMsg text={msg.text} key={msg.id} />
         )

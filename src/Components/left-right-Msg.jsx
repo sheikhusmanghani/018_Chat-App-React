@@ -1,5 +1,7 @@
+import { deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { db } from "../Firebase";
 
 export const LeftMsg = ({ text }) => {
   //   const firstLetter = letter[0];
@@ -15,40 +17,21 @@ export const LeftMsg = ({ text }) => {
   );
 };
 
-// export const RightMsg = ({ text }) => {
-//   const firstLetter = letter[0];
-
-// const onRigtClick = (e) => {
-//   e.preventDefault(); //  browser options ko rookny k liye
-
-//   console.log("Right Clicked on message");
-// };
-// return (
-//   <div className="rightSideMsg flex justify-end " onContextMenu={onRigtClick}>
-//     <p className=" py-1 px-2 h-fit rounded-xl rounded-ee-none max-w-[400px] text-justify break-words ">
-//       {text}
-//     </p>
-//     <p className=" h-[33px] w-[32px]  flex justify-center items-center ml-1 rounded-full uppercase  self-end">
-//       {/* {firstLetter} */}A
-//     </p>
-//   </div>
-// );
-// };
-
-export const RightMsg = ({ text }) => {
+export const RightMsg = ({ text, msgId }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
+  console.log(msgId);
   // Handle right-click
   const onRightClick = (e) => {
     e.preventDefault(); // Disable default browser context menu
 
-    // Set menu position where right-click happened
+    // Set menu position
     setMenuPosition({ x: e.pageX, y: e.pageY });
-    setShowMenu(true); // Show the custom menu
+    setShowMenu(true); // Show custom menu
   };
 
-  // Handle click on options
+  // jb kisi option pr click ho to...
   const handleOptionClick = (option) => {
     setShowMenu(false); // Hide the menu
     console.log(`${option} clicked`);
@@ -56,8 +39,11 @@ export const RightMsg = ({ text }) => {
     //  custom functionality daal sakty hyn yaha
     if (option === "Edit") {
       console.log("Edit function triggered");
+      //
     } else if (option === "Delete") {
-      console.log("Delete function triggered");
+      // console.log("Delete function triggered");
+      deleteDoc(doc(db, "messages", msgId)); // delete doc from firestore
+      //
     } else if (option === "Copy") {
       console.log("Copy function triggered");
       navigator.clipboard.writeText(text);
@@ -69,7 +55,7 @@ export const RightMsg = ({ text }) => {
     }
   };
 
-  // Hide menu on any global click outside
+  // kahi bhi click hoga to options box hide hojay ga.
   useEffect(() => {
     const handleGlobalClick = (e) => {
       setShowMenu(false);
@@ -91,7 +77,7 @@ export const RightMsg = ({ text }) => {
       onContextMenu={onRightClick}
     >
       {/* Main message bubble */}
-      <p className="relative py-1 px-2 h-fit rounded-xl rounded-ee-none max-w-[400px] text-justify bg-purple-800 text-white">
+      <p className="relative py-1 px-2 h-fit rounded-xl rounded-ee-none max-w-[400px] text-justify bg-purple-800 text-white break-words">
         {text}
       </p>
       <p className="h-[33px] w-[32px] flex justify-center items-center ml-1 rounded-full uppercase bg-gray-200">
@@ -112,14 +98,16 @@ export const RightMsg = ({ text }) => {
           <li
             title="Edit"
             className="px-1 py-1 hover:bg-gray-100 "
-            onClick={() => handleOptionClick("Edit")}
+            onClick={() => handleOptionClick("Edit")} //   edit  document
           >
             &#128395;
           </li>
           <li
             title="Delete"
             className="px-1 py-1 hover:bg-gray-100 "
-            onClick={() => handleOptionClick("Delete")}
+            onClick={() => {
+              handleOptionClick("Delete");
+            }}
           >
             &#128465;
           </li>
