@@ -4,10 +4,16 @@ import ChatInput from "../Components/ChatInput";
 import { FaTrashCan } from "react-icons/fa6";
 import { useContext } from "react";
 import { context } from "../Context/Context";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../Firebase";
 
 const CurrentChat = () => {
-  const { msgReceiver } = useContext(context);
-  //  msgReceiver && console.log(msgReceiver);
+  const { msgReceiver, currentUser } = useContext(context);
+
+  const clearAllMsgs = async () => {
+    // const a=  await deleteDoc(doc(db, "messages", chatId));
+    console.log("xxxxx");
+  };
 
   return (
     // Condition for receiver
@@ -26,7 +32,7 @@ const CurrentChat = () => {
             <div className="pr-3">
               <FaTrashCan
                 className="text-purple-950 text-[25px]"
-                // onClick={clearMsgs}
+                onClick={clearAllMsgs}
               />
             </div>
           </div>
@@ -38,7 +44,7 @@ const CurrentChat = () => {
       </div>
     ) : (
       // jab receiver selected nhi hoga to...
-      <div className="flex items-center justify-center h-full text-2xl">
+      <div className="flex items-center justify-center h-full text-2xl font-bold text-purple-950 text-center">
         No message receiver selected
       </div>
     )

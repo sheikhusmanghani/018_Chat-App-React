@@ -45,18 +45,18 @@ const AllChats = () => {
       </div>
 
       {/* Search Box */}
-      <div className="w-full pt-1 pb-3 hidden md:flex md:justify-center">
+      <div className="pt-1 pb-2 hidden md:flex md:justify-center  ">
         <input
           type="text"
           placeholder="Search By User Name"
-          className="text-center bg-white p-2 rounded shadow-md"
+          className="text-center bg-white p-2 rounded shadow-md focus:outline-purple-700"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
       {/* User List */}
-      <div className="users flex justify-center w-full md:block md:overflow-y-auto overflow-x-auto">
+      <div className="users px-2 flex justify-center w-full md:block md:overflow-y-auto overflow-x-auto">
         {filteredUsers?.length > 0 ? (
           filteredUsers.map((user) => (
             <p
